@@ -17,5 +17,25 @@
         "vue"
     ],
     "rules": {
+        "semi":[
+            "error",
+            "never"
+        ],
+        "indent":[
+            "warn",
+            2,
+            {
+              "ignoredNodes":[
+                "TemplateLiteral"
+              ]
+            }
+        ],
+        "quotes":[
+            "warn",
+            "single",
+            {
+              "avoidEscape":true
+            }
+        ]
     }
 }
