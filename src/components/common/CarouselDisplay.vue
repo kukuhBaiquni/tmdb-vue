@@ -5,8 +5,10 @@ import 'vue3-carousel/dist/carousel.css'
 import clsx from 'clsx'
 
 /**
+ * @module components/common/CarouselDisplay
+ * @desc Component for displaying data
  * @vue-prop {Array} [data=[]] - Slides to display in carousel
- * @vue-data {String} IMAGE_URL - Default url prefix for displaying image from tmdb
+ * @vue-data {String} IMAGE_URL - Static url prefix for displaying image from tmdb
  */
 
 export default {

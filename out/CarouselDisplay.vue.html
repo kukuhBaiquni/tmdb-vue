@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: CarouselDisplay.vue</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: CarouselDisplay.vue</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>&lt;script>
+import { Carousel, Slide } from 'vue3-carousel'
+import GENRE from '../../constants/genre'
+import 'vue3-carousel/dist/carousel.css'
+import clsx from 'clsx'
+
+/**
+ * @module components/common/CarouselDisplay
+ * @desc Component for displaying data
+ * @vue-prop {Array} [data=[]] - Slides to display in carousel
+ * @vue-data {String} IMAGE_URL - Default url prefix for displaying image from tmdb
+ */
+
+export default {
+  name: 'CarouselDisplay',
+  data: function () {
+    return {
+      IMAGE_URL: import.meta.env.VITE_IMAGE_URL,
+      GENRE,
+      currentPage: 1,
+    }
+  },
+  computed: {
+    /**
+     * Fuck a component
+     */
+    genres() {
+      return (ids) => {
+        const genre = ids.map((id) => this.GENRE[id]).join`, `
+        return genre
+      }
+    },
+    activeDot() {
+      return (index) => {
+        return clsx(
+          'rounded-full h-2 t',
+          this.currentPage === index - 1 ? 'w-8 bg-pink-600' : 'w-3 bg-gray-400'
+        )
+      }
+    },
+  },
+  components: {
+    Carousel,
+    Slide,
+  },
+  props: {
+    data: {
+      default: () => [],
+      type: Array,
+    },
+  },
+  methods: {
+    next() {
+      this.$refs.carousel.next()
+    },
+    prev() {
+      this.$refs.carousel.prev()
+    },
+    slideStart(prop) {
+      this.currentPage = prop.slidingToIndex
+    },
+    slideTo(index) {
+      this.$refs.carousel.slideTo(index - 1)
+    },
+  },
+}
+&lt;/script>
+
+&lt;template>
+  &lt;div class="max-w-screen-xl block relative group">
+    &lt;Carousel
+      v-model="currentPage"
+      @slide-start="slideStart"
+      ref="carousel"
+      :autoplay="3000"
+      :items-to-show="2"
+      :settings="{ snapAlign: 'start' }"
+      :wrap-around="true"
+    >
+      &lt;Slide v-for="movie in data" :key="movie?.id">
+        &lt;div class="relative bg-transparent">
+          &lt;div class="overflow-hidden">
+            &lt;div
+              class="poster-mask w-full h-full absolute left-0 bottom-0 z-10 rounded-xl"
+            />
+            &lt;img
+              :src="`${IMAGE_URL}/original${movie.backdrop_path}`"
+              class="w-full h-[350px] object-cover"
+              alt="vingo"
+            />
+          &lt;/div>
+          &lt;div class="absolute bottom-4 left-4 z-20">
+            &lt;h3 class="text-3xl font-bold text-left">
+              {{ movie?.title }}
+            &lt;/h3>
+            &lt;div class="flex gap-1 mt-1">
+              &lt;span class="text-xs uppercase text-left">{{
+                genres(movie.genre_ids)
+              }}&lt;/span>
+              &lt;!-- &lt;div v-for="id in movie.genre_ids" :key="id">
+              &lt;/div> -->
+            &lt;/div>
+            &lt;button
+              type="button"
+              class="flex items-center justify-center bg-pink-600 py-1 px-4 rounded mt-2 text-sm"
+            >
+              Watch Trailler
+              &lt;i class="bx bx-play-circle text-xl ml-2">&lt;/i>
+            &lt;/button>
+          &lt;/div>
+        &lt;/div>
+      &lt;/Slide>
+    &lt;/Carousel>
+    &lt;div class="flex justify-between absolute top-1/2 z-50 w-full">
+      &lt;button
+        @click="prev"
+        type="button"
+        class="hover:bg-opacity-70 rounded-full fc t translate-x-3 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+      >
+        &lt;i class="bx bx-chevron-left text-5xl">&lt;/i>
+      &lt;/button>
+      &lt;button
+        @click="next"
+        type="button"
+        class="hover:bg-opacity-70 rounded-full fc t -translate-x-3 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+      >
+        &lt;i class="bx bx-chevron-right text-5xl">&lt;/i>
+      &lt;/button>
+    &lt;/div>
+    &lt;div class="fc gap-1 mt-4">
+      &lt;button
+        @click="slideTo(page)"
+        :title="data[page - 1].title"
+        type="button"
+        v-for="page in data.length"
+        :class="activeDot(page)"
+        :key="page"
+      >&lt;/button>
+    &lt;/div>
+  &lt;/div>
+  &lt;div>
+    &lt;h6 class="text-xl mb-4 font-bold">Popular Movies&lt;/h6>
+    &lt;div v-for="movie in data" :key="movie.id">
+      &lt;div class="flex gap-4 mb-4">
+        &lt;div class="overflow-hidden rounded-xl">
+          &lt;img
+            :src="`${IMAGE_URL}/original${movie.backdrop_path}`"
+            class="w-[110px] h-[150px] object-cover hover:transform hover:scale-125 t"
+            alt="vingo"
+          />
+        &lt;/div>
+        &lt;h6>{{ movie.title }}&lt;/h6>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/template>
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-components_common_CarouselDisplay.html">components/common/CarouselDisplay</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Mar 07 2023 03:15:43 GMT+0700 (Indochina Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
