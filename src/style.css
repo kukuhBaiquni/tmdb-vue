@@ -7,13 +7,26 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+input:focus {
+  @apply outline-none;
+}
+
+body {
+  @apply font-titillium text-white text-opacity-70;
+}
+
+.poster-mask {
+  background: rgb(0,0,0);
+  background: linear-gradient(5deg, rgba(0, 0, 0, 0.75) 0%, rgba(255,23,23,0) 100%);
+}
+
+.t {@apply transition-all}
+.fc {@apply flex items-center justify-center}
+.f {@apply flex}
