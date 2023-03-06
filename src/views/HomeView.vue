@@ -8,11 +8,11 @@ export default {
     return {
       movies: [],
       socmed: [
-        { name: 'Facebook', icon: 'bx bxl-facebook', class: 'bg-blue-400' },
-        { name: 'Instagram', icon: 'bx bxl-instagram', class: 'bg-red-400' },
-        { name: 'Twitter', icon: 'bx bxl-twitter', class: 'bg-cyan-400' },
-        { name: 'Whatsapp', icon: 'bx bxl-whatsapp', class: 'bg-green-400' },
-        { name: 'Telegram', icon: 'bx bxl-telegram', class: 'bg-blue-600' },
+        { name: 'Facebook', icon: 'bx bxl-facebook', class: 'bg-blue-600' },
+        { name: 'Instagram', icon: 'bx bxl-instagram', class: 'bg-pink-600' },
+        { name: 'Twitter', icon: 'bx bxl-twitter', class: 'bg-cyan-600' },
+        { name: 'Whatsapp', icon: 'bx bxl-whatsapp', class: 'bg-green-600' },
+        { name: 'Telegram', icon: 'bx bxl-telegram', class: 'bg-blue-800' },
       ],
     }
   },
@@ -25,14 +25,13 @@ export default {
   computed: {
     createClass() {
       return (cls) => {
-        return clsx(cls, 'px-2 fc h-full')
+        return clsx(cls, 'px-2 fc h-full rounded-sm hover:opacity-80 t')
       }
     },
   },
   methods: {
     async getMovie() {
       const response = await getMovieNowPlaying()
-      console.log(response)
       this.movies = response.results
     },
   },
@@ -50,7 +49,7 @@ export default {
           class="w-[300px] border border-white border-opacity-70 rounded flex items-center focus-within:border-pink-600 transition-all duration-300"
         >
           <input
-            type="text"
+            type="search"
             class="h-full w-full bg-transparent px-2"
             placeholder="Search Movies.."
           />
@@ -74,9 +73,9 @@ export default {
           </button>
         </div>
       </div>
-      <div class="w-full bg-gray-900 px-3">
+      <div class="w-full bg-gray-900 px-3 py-1">
         <div class="max-w-screen-xl mx-auto flex justify-between">
-          <ul class="max-w-[350px] text-sm fc gap-4 py-1">
+          <ul class="max-w-[350px] text-sm fc gap-4">
             <li>
               <a href="#" class="hover:text-pink-600 t">Genre</a>
             </li>
@@ -85,7 +84,7 @@ export default {
             <li>Country</li>
             <li>Recommended</li>
           </ul>
-          <ul class="flex text-xl">
+          <ul class="flex text-xl gap-1">
             <li v-for="soc in socmed" :key="soc.icon">
               <button
                 type="button"

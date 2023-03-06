@@ -27,6 +27,6 @@ body {
   background: linear-gradient(5deg, rgba(0, 0, 0, 0.75) 0%, rgba(255,23,23,0) 100%);
 }
 
-.t {@apply transition-all}
+.t {@apply transition-all duration-300}
 .fc {@apply flex items-center justify-center}
 .f {@apply flex}

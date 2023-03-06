@@ -2,6 +2,7 @@
 import { Carousel, Slide } from 'vue3-carousel'
 import GENRE from '../../constants/genre'
 import 'vue3-carousel/dist/carousel.css'
+import clsx from 'clsx'
 
 export default {
   name: 'CarouselDisplay',
@@ -9,6 +10,7 @@ export default {
     return {
       IMAGE_URL: import.meta.env.VITE_IMAGE_URL,
       GENRE,
+      currentPage: 1,
     }
   },
   computed: {
@@ -16,6 +18,14 @@ export default {
       return (ids) => {
         const genre = ids.map((id) => this.GENRE[id]).join`, `
         return genre
+      }
+    },
+    activeDot() {
+      return (index) => {
+        return clsx(
+          'rounded-full h-2 t',
+          this.currentPage === index - 1 ? 'w-8 bg-pink-600' : 'w-3 bg-gray-400'
+        )
       }
     },
   },
@@ -29,33 +39,52 @@ export default {
       type: Array,
     },
   },
+  methods: {
+    next() {
+      this.$refs.carousel.next()
+    },
+    prev() {
+      this.$refs.carousel.prev()
+    },
+    slideStart(prop) {
+      this.currentPage = prop.slidingToIndex
+    },
+    slideTo(index) {
+      this.$refs.carousel.slideTo(index - 1)
+    },
+  },
 }
 </script>
 
 <template>
-  <div class="max-w-screen-xl block">
+  <div class="max-w-screen-xl block relative group">
     <Carousel
-      :autoplay="5000"
+      v-model="currentPage"
+      @slide-start="slideStart"
+      ref="carousel"
+      :autoplay="3000"
       :items-to-show="2"
       :settings="{ snapAlign: 'start' }"
-      :wrap-around="false"
+      :wrap-around="true"
     >
       <Slide v-for="movie in data" :key="movie?.id">
-        <div class="mr-4 relative bg-transparent">
-          <div
-            class="poster-mask w-full h-full absolute left-0 bottom-0 z-10 rounded-xl"
-          />
-          <img
-            :src="`${IMAGE_URL}/original${movie.backdrop_path}`"
-            class="w-full h-[350px] object-cover"
-            alt="vingo"
-          />
-          <div class="absolute bottom-4 left-4 z-20 w-1/2">
+        <div class="relative bg-transparent">
+          <div class="overflow-hidden">
+            <div
+              class="poster-mask w-full h-full absolute left-0 bottom-0 z-10 rounded-xl"
+            />
+            <img
+              :src="`${IMAGE_URL}/original${movie.backdrop_path}`"
+              class="w-full h-[350px] object-cover"
+              alt="vingo"
+            />
+          </div>
+          <div class="absolute bottom-4 left-4 z-20">
             <h3 class="text-3xl font-bold text-left">
               {{ movie?.title }}
             </h3>
             <div class="flex gap-1 mt-1">
-              <span class="text-xs uppercase">{{
+              <span class="text-xs uppercase text-left">{{
                 genres(movie.genre_ids)
               }}</span>
               <!-- <div v-for="id in movie.genre_ids" :key="id">
@@ -72,6 +101,32 @@ export default {
         </div>
       </Slide>
     </Carousel>
+    <div class="flex justify-between absolute top-1/2 z-50 w-full">
+      <button
+        @click="prev"
+        type="button"
+        class="hover:bg-opacity-70 rounded-full fc t translate-x-3 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+      >
+        <i class="bx bx-chevron-left text-5xl"></i>
+      </button>
+      <button
+        @click="next"
+        type="button"
+        class="hover:bg-opacity-70 rounded-full fc t -translate-x-3 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+      >
+        <i class="bx bx-chevron-right text-5xl"></i>
+      </button>
+    </div>
+    <div class="fc gap-1 mt-4">
+      <button
+        @click="slideTo(page)"
+        :title="data[page - 1].title"
+        type="button"
+        v-for="page in data.length"
+        :class="activeDot(page)"
+        :key="page"
+      ></button>
+    </div>
   </div>
   <div>
     <h6 class="text-xl mb-4 font-bold">Popular Movies</h6>
