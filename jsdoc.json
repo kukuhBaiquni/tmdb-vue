@@ -1,0 +1,20 @@
+{
+  "plugins": ["node_modules/jsdoc-vuejs"],
+  "source": {
+    "include": ["."],
+    "includePattern": "\\.(vue|js)$"
+  },
+  "sourceType": "module",
+  "templates": {
+    "better-docs": {
+      "name": "Movue",
+      "navigation": [
+        {
+          "label": "Github Repository",
+          "href": "https://github.com/kukuhBaiquni/movue"
+        }
+      ]
+    },
+    "search": true
+  }
+}

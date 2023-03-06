@@ -4,6 +4,11 @@ import GENRE from '../../constants/genre'
 import 'vue3-carousel/dist/carousel.css'
 import clsx from 'clsx'
 
+/**
+ * @vue-prop {Array} [data=[]] - Slides to display in carousel
+ * @vue-data {String} IMAGE_URL - Default url prefix for displaying image from tmdb
+ */
+
 export default {
   name: 'CarouselDisplay',
   data: function () {
