@@ -9,7 +9,6 @@ import CarouselPagination from './CarouselPagination.vue'
  * @module components/data-display/carousel/CarouselDisplay
  * @desc Component for displaying data
  * @vue-prop {Array} data - Slides to display in carousel
- * @vue-data {String} [IMAGE_URL=https://image.tmdb.org/t/p] - Static url prefix for displaying image from tmdb
  * @vue-data {Number} [currentPage=1] - Indicator for current active carousel page, useful for styling pagination according to active page
  */
 
@@ -17,7 +16,6 @@ export default {
   name: 'CarouselDisplay',
   data: function () {
     return {
-      IMAGE_URL: import.meta.env.VITE_IMAGE_URL,
       currentPage: 1,
     }
   },
@@ -78,20 +76,5 @@ export default {
       :forwardRef="this.$refs.carousel"
       :dataLength="data.length"
     />
-  </div>
-  <div>
-    <h6 class="text-xl mb-4 font-bold">Popular Movies</h6>
-    <div v-for="movie in data" :key="movie.id">
-      <div class="flex gap-4 mb-4">
-        <div class="overflow-hidden rounded-xl">
-          <img
-            :src="`${IMAGE_URL}/original${movie.backdrop_path}`"
-            class="w-[110px] h-[150px] object-cover hover:transform hover:scale-125 t"
-            alt="vingo"
-          />
-        </div>
-        <h6>{{ movie.title }}</h6>
-      </div>
-    </div>
   </div>
 </template>

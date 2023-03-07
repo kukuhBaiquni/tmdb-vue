@@ -1,6 +1,4 @@
 <script>
-import clsx from 'clsx'
-
 /**
  * @module components/data-display/carousel/CarouselPagination
  * @desc Component for indicating active page & item count of carousel
@@ -28,16 +26,6 @@ export default {
       required: true,
     },
   },
-  computed: {
-    activeDot() {
-      return (index) => {
-        return clsx(
-          'rounded-full h-2 t',
-          this.currentPage === index - 1 ? 'w-8 bg-pink-600' : 'w-3 bg-gray-400'
-        )
-      }
-    },
-  },
   methods: {
     /**
      * Function for navigating carousel page to specific index
@@ -56,7 +44,10 @@ export default {
       @click="slideTo(page)"
       type="button"
       v-for="page in dataLength"
-      :class="activeDot(page)"
+      :class="[
+        'rounded-full h-2 t',
+        currentPage === page - 1 ? 'w-8 bg-pink-600' : 'w-3 bg-gray-400',
+      ]"
       :key="page"
     ></button>
   </div>
