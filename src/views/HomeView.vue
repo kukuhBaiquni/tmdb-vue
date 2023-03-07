@@ -1,6 +1,6 @@
 <script>
 import { getMovieNowPlaying } from '../api/movies'
-import CarouselDisplay from '../components/common/CarouselDisplay.vue'
+import CarouselDisplay from '../components/data-display/carousel/CarouselDisplay.vue'
 import clsx from 'clsx'
 
 export default {
