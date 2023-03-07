@@ -1,5 +1,17 @@
 <script>
 import GENRE from '../../../constants/genre'
+
+/**
+ * @module components/data-display/carousel/SliderItemNowPlaying
+ * @desc Component for wrapping carousel item display
+ * @vue-prop {Object} movie - Object data for displayed in carousel item
+ * {@link https://developers.themoviedb.org/3/movies/get-now-playing tmdb-api response}
+ * @vue-data {Object} GENRE - List data for mapping genre ids
+ *
+ * @vue-computed {String} genres - Function for merging array of string genre
+ * @see {@link constants/genres}
+ */
+
 export default {
   name: 'SliderItemNowPlaying',
   data: function () {

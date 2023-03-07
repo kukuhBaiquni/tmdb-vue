@@ -1,3 +1,8 @@
+/**
+ * @module constants/genre
+ * @desc Genre mapping towards ids
+ */
+
 const GENRE = {
   28: 'Action',
   12: 'Adventure',

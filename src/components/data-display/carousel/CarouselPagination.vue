@@ -1,5 +1,16 @@
 <script>
 import clsx from 'clsx'
+
+/**
+ * @module components/data-display/carousel/CarouselPagination
+ * @desc Component for indicating active page & item count of carousel
+ * @vue-prop {Number} currentPage - Current active page of carousel
+ * @vue-prop {Object} forwardRef - This props is a ref (React.forwardRef) from carousel component
+ * @vue-prop {Number} dataLength - Number of carousel slides item
+ *
+ * @vue-computed {String} activeDot - Function for generating active/inactive page class
+ */
+
 export default {
   name: 'CarouselPagination',
   props: {
@@ -28,6 +39,10 @@ export default {
     },
   },
   methods: {
+    /**
+     * Function for navigating carousel page to specific index
+     * @param {Number} index - Make carouse sliding into this page
+     */
     slideTo(index) {
       this.forwardRef.slideTo(index - 1)
     },

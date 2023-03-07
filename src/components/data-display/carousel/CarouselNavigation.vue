@@ -1,14 +1,31 @@
 <script>
+/**
+ * @module components/data-display/carousel/CarouselNavigation
+ * @desc Component for navigating carousel page manually
+ * @vue-prop {Object} forwardRef - This props is a ref (React.forwardRef) from carousel component
+ */
+
 export default {
   name: 'CarouselNavigation',
   props: {
-    prev: {
-      type: Function,
-      required: true,
+    forwardRef: {
+      type: [Object, Function],
+      required: false,
+      default: () => {},
     },
-    next: {
-      type: Function,
-      required: true,
+  },
+  methods: {
+    /**
+     * Function for navigating carousel page forward
+     */
+    next() {
+      this.forwardRef.next()
+    },
+    /**
+     * Function for navigating carousel page backward
+     */
+    prev() {
+      this.forwardRef.prev()
     },
   },
 }

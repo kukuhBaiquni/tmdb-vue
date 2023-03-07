@@ -5,13 +5,12 @@ import CarouselNavigation from './CarouselNavigation.vue'
 import 'vue3-carousel/dist/carousel.css'
 import CarouselPagination from './CarouselPagination.vue'
 
-/** @module components/data-display/carousel/CarouselDisplay */
-
 /**
  * @module components/data-display/carousel/CarouselDisplay
  * @desc Component for displaying data
  * @vue-prop {Array} data - Slides to display in carousel
  * @vue-data {String} [IMAGE_URL=https://image.tmdb.org/t/p] - Static url prefix for displaying image from tmdb
+ * @vue-data {Number} [currentPage=1] - Indicator for current active carousel page, useful for styling pagination according to active page
  */
 
 export default {
@@ -37,12 +36,20 @@ export default {
     },
   },
   methods: {
-    next() {
-      this.$refs.carousel.next()
-    },
-    prev() {
-      this.$refs.carousel.prev()
-    },
+    /**
+     * By default this function accept prop object,
+     * this function called when carousel start sliding,
+     * this function updating currentPage that useful
+     * for matching between dot movement and carousel page transition, see more at
+     * {@link https://ismail9k.github.io/vue3-carousel/api/events.html vue3-carousel docs}
+     *
+     * @param {Object} prop - By default this object have following property
+     * @param {Number} prop.slidingToIndex - Next page index
+     * @param {Number} prop.currentSlideIndex - Current page index
+     * @param {Number} prop.prevSlideIndex - Previous page index
+     * @param {Number} prop.slidesCount - Page count
+     *
+     */
     slideStart(prop) {
       this.currentPage = prop.slidingToIndex
     },
@@ -65,7 +72,7 @@ export default {
         <SliderItemNowPlaying :movie="movie" />
       </Slide>
     </Carousel>
-    <CarouselNavigation :next="next" :prev="prev" />
+    <CarouselNavigation :forwardRef="this.$refs.carousel" />
     <CarouselPagination
       :currentPage="currentPage"
       :forwardRef="this.$refs.carousel"
