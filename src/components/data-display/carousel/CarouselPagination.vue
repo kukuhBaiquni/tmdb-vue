@@ -40,8 +40,10 @@ export default {
 
 <template>
   <div class="fc gap-1 mt-4">
+    <div data-cy="carousel-page-indicator" hidden>{{ currentPage }}</div>
     <button
       @click="slideTo(page)"
+      data-cy="carousel-page-button"
       type="button"
       v-for="page in dataLength"
       :class="[

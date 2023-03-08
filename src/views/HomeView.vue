@@ -2,19 +2,11 @@
 import { getMovieNowPlaying } from '../api/movies'
 import CarouselDisplay from '../components/data-display/carousel/CarouselDisplay.vue'
 import AppBar from '../components/block/appbar/AppBar.vue'
-import clsx from 'clsx'
 
 export default {
   data: function () {
     return {
       movies: [],
-      socmed: [
-        { name: 'Facebook', icon: 'bx bxl-facebook', class: 'bg-blue-600' },
-        { name: 'Instagram', icon: 'bx bxl-instagram', class: 'bg-pink-600' },
-        { name: 'Twitter', icon: 'bx bxl-twitter', class: 'bg-cyan-600' },
-        { name: 'Whatsapp', icon: 'bx bxl-whatsapp', class: 'bg-green-600' },
-        { name: 'Telegram', icon: 'bx bxl-telegram', class: 'bg-blue-800' },
-      ],
     }
   },
   components: {
@@ -23,13 +15,6 @@ export default {
   },
   mounted() {
     this.getMovie()
-  },
-  computed: {
-    createClass() {
-      return (cls) => {
-        return clsx(cls, 'px-2 fc h-full rounded-sm hover:opacity-80 t')
-      }
-    },
   },
   methods: {
     async getMovie() {

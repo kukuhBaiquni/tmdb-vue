@@ -38,7 +38,7 @@ export default {
 </script>
 
 <template>
-  <div class="relative bg-transparent">
+  <div class="relative bg-transparent" data-cy="playnow-items">
     <div class="overflow-hidden">
       <div
         class="poster-mask w-full h-full absolute left-0 bottom-0 z-10 rounded-xl"
