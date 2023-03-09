@@ -24,7 +24,7 @@ export default {
       default: () => {},
     },
     className: {
-      type: String,
+      type: [String, Array],
       default: '',
     },
     showBadge: {

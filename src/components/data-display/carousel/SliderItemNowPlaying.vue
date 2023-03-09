@@ -1,5 +1,6 @@
 <script>
 import GENRE from '../../../constants/genre'
+import ButtonBase from '../../common/ButtonBase.vue'
 
 /**
  * @module components/data-display/carousel/SliderItemNowPlaying
@@ -19,6 +20,9 @@ export default {
       GENRE,
       IMAGE_URL: import.meta.env.VITE_IMAGE_URL,
     }
+  },
+  components: {
+    ButtonBase,
   },
   props: {
     movie: {
@@ -58,13 +62,14 @@ export default {
           genres(movie.genre_ids)
         }}</span>
       </div>
-      <button
-        type="button"
-        class="flex items-center justify-center bg-pink-600 py-1 px-4 rounded mt-2 text-sm"
+      <ButtonBase
+        className="flex items-center justify-center bg-pink-600 py-1 px-4 rounded mt-2 text-sm"
       >
-        Watch Trailler
-        <i class="bx bx-play-circle text-xl ml-2"></i>
-      </button>
+        <template #child>
+          Watch Trailler
+          <i class="bx bx-play-circle text-xl ml-2"></i>
+        </template>
+      </ButtonBase>
     </div>
   </div>
 </template>

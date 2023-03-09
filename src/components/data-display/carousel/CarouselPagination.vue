@@ -9,6 +9,8 @@
  * @vue-computed {String} activeDot - Function for generating active/inactive page class
  */
 
+import ButtonBase from '../../common/ButtonBase.vue'
+
 export default {
   name: 'CarouselPagination',
   props: {
@@ -26,6 +28,9 @@ export default {
       required: true,
     },
   },
+  components: {
+    ButtonBase,
+  },
   methods: {
     /**
      * Function for navigating carousel page to specific index
@@ -41,16 +46,16 @@ export default {
 <template>
   <div class="fc gap-1 mt-4">
     <div data-cy="carousel-page-indicator" hidden>{{ currentPage }}</div>
-    <button
-      @click="slideTo(page)"
-      data-cy="carousel-page-button"
-      type="button"
+    <ButtonBase
       v-for="page in dataLength"
-      :class="[
+      data-cy="carousel-page-button"
+      :className="[
         'rounded-full h-2 t',
         currentPage === page - 1 ? 'w-8 bg-pink-600' : 'w-3 bg-gray-400',
       ]"
       :key="page"
-    ></button>
+      :onClick="() => slideTo(page)"
+    >
+    </ButtonBase>
   </div>
 </template>

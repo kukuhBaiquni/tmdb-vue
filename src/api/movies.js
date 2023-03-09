@@ -14,3 +14,10 @@ export const getMovieUpcoming = async (params) =>
     url: '/movie/upcoming',
     params
   })
+
+export const searchMovie = async (params) => 
+  API({
+    method: 'GET',
+    url: '/search/movie',
+    params
+  })

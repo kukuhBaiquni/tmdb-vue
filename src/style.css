@@ -19,7 +19,7 @@ input:focus {
 }
 
 body {
-  @apply font-titillium text-white text-opacity-70;
+  @apply font-titillium text-white text-opacity-70 bg-gray-900;
 }
 
 .poster-mask {
@@ -30,3 +30,19 @@ body {
 .t {@apply transition-all duration-300}
 .fc {@apply flex items-center justify-center}
 .f {@apply flex}
+
+.circle-expand {
+  @apply h-[3000px] w-[3000px] t;
+}
+
+.circle-collapse {
+  @apply w-[50px] h-[50px] translate-y-[300px] rounded-full t;
+}
+
+.next-invis {
+  @apply w-1/2 h-[1600px] bg-red-600 relative t -z-50;
+}
+
+.next-tr {
+  @apply w-[50px] h-[50px] bg-red-600 t z-50 rounded-full delay-100 translate-y-[800px];
+}
