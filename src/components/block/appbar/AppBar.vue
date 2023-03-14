@@ -1,5 +1,6 @@
 <script>
 import ActionGroup from '../../common/ActionGroup.vue'
+import InputWithIcon from '../../form/InputWithIcon.vue'
 import {
   utilAction,
   socmedAction,
@@ -15,6 +16,7 @@ export default {
   },
   components: {
     ActionGroup,
+    InputWithIcon,
   },
 }
 </script>
@@ -26,18 +28,7 @@ export default {
         <i class="bx bx-camera-movie text-3xl"></i>
         <h3 class="font-bold">Movue</h3>
       </div>
-      <div
-        class="w-[300px] border border-white border-opacity-70 rounded flex items-center focus-within:border-pink-600 transition-all duration-300"
-      >
-        <input
-          type="search"
-          class="h-full w-full bg-transparent px-2"
-          placeholder="Search Movies.."
-        />
-        <i
-          class="bx bx-search-alt-2 text-xl px-2 border-l border-white border-opacity-70"
-        ></i>
-      </div>
+      <InputWithIcon />
       <ActionGroup :data="utilAction" />
     </div>
     <div class="w-full bg-gray-900 px-3 py-1">

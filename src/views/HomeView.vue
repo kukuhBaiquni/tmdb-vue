@@ -2,7 +2,6 @@
 import { getMovieNowPlaying } from '../api/movies'
 import CarouselDisplay from '../components/data-display/carousel/CarouselDisplay.vue'
 import AppBar from '../components/block/appbar/AppBar.vue'
-import InputBase from '../components/form/InputBase.vue'
 
 export default {
   data: function () {
@@ -13,7 +12,6 @@ export default {
   components: {
     CarouselDisplay,
     AppBar,
-    InputBase,
   },
   mounted() {
     this.getMovie()
@@ -35,9 +33,6 @@ export default {
           Now Playing
         </h5>
         <CarouselDisplay :data="movies" />
-        <InputBase
-          className="w-[300px] border border-white border-opacity-70 rounded flex items-center focus-within:border-pink-600 t"
-        />
       </div>
     </div>
   </main>

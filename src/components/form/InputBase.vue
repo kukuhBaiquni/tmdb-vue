@@ -1,21 +1,43 @@
 <script>
+import ButtonBase from '../common/ButtonBase.vue'
+import { debounce } from 'throttle-debounce'
+
 export default {
+  name: 'InputBase',
+  components: {
+    ButtonBase,
+  },
   props: {
     value: {
       type: [String, Number],
       default: '',
     },
     className: {
-      value: String,
-      default:
-        'w-[300px] border border-white border-opacity-70 rounded flex items-center focus-within:border-pink-600 transition-all duration-300',
-    },
-    label: {
-      value: String,
+      type: String,
+      default: 'fc',
     },
     type: {
       type: String,
       default: 'text',
+    },
+    onEnter: {
+      type: Function,
+      default: () => {},
+    },
+    onButtonPress: {
+      type: Function,
+      default: () => {},
+    },
+    label: {
+      type: String,
+      default: '',
+    },
+  },
+  methods: {
+    onKeyPress(evt) {
+      if (evt.key === 'Enter') {
+        this.onEnter()
+      }
     },
   },
 }
@@ -23,13 +45,19 @@ export default {
 
 <template>
   <label>
-    Galat
-    <div :class="className">
+    {{ label }}
+    <div class="input-wrapper">
       <input
+        class="bg-transparent w-full h-full"
         type="search"
-        class="h-full w-full bg-transparent px-2"
         placeholder="Search Movies.."
+        @keyup="onKeyPress"
       />
+      <ButtonBase>
+        <template #child>
+          <slot name="icon" />
+        </template>
+      </ButtonBase>
     </div>
   </label>
 </template>
