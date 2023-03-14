@@ -1,6 +1,7 @@
 <script>
 import ButtonBase from '../common/ButtonBase.vue'
 import { debounce } from 'throttle-debounce'
+import { searchMovie } from '../../api/movies'
 
 export default {
   name: 'InputBase',
@@ -39,6 +40,16 @@ export default {
         this.onEnter()
       }
     },
+    debounceInput: debounce(500, async (e) => {
+      const { value } = e.target
+      if (value) {
+        const response = await searchMovie({
+          query: e.target.value,
+          include_adult: true,
+        })
+        console.log(response)
+      }
+    }),
   },
 }
 </script>
@@ -52,6 +63,7 @@ export default {
         type="search"
         placeholder="Search Movies.."
         @keyup="onKeyPress"
+        @input="debounceInput"
       />
       <ButtonBase>
         <template #child>
