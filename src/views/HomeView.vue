@@ -12,10 +12,11 @@ export default {
     }),
   },
   mounted() {
-    this.$store.dispatch('movies/getNowPlayingMovie')
+    // this.$store.dispatch('movies/getNowPlayingMovie')
+    this.getNowPlayingMovie()
   },
   methods: {
-    ...mapActions({
+    ...mapActions('movies', {
       getNowPlayingMovie: 'getNowPlayingMovie',
     }),
   },

@@ -18,6 +18,13 @@ input:focus {
   @apply outline-none;
 }
 
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:none;
+}
+
 body {
   @apply font-titillium text-white text-opacity-70;
 }
@@ -31,5 +38,5 @@ body {
 .fc {@apply flex items-center justify-center}
 .f {@apply flex}
 .input-wrapper {
-  @apply w-[450px] border border-white border-opacity-70 rounded flex items-center focus-within:border-pink-600 px-2 py-1 t;
+  @apply w-[450px] border border-white border-opacity-70 flex items-center focus-within:border-pink-600 px-2 py-1 t;
 }

@@ -1,6 +1,6 @@
 <script>
 import ActionGroup from '../../common/ActionGroup.vue'
-import InputWithIcon from '../../form/InputWithIcon.vue'
+import SearchInput from '../../form/SearchInput.vue'
 import {
   utilAction,
   socmedAction,
@@ -16,7 +16,7 @@ export default {
   },
   components: {
     ActionGroup,
-    InputWithIcon,
+    SearchInput,
   },
 }
 </script>
@@ -28,7 +28,7 @@ export default {
         <i class="bx bx-camera-movie text-3xl"></i>
         <h3 class="font-bold">Movue</h3>
       </div>
-      <InputWithIcon />
+      <SearchInput />
       <ActionGroup :data="utilAction" />
     </div>
     <div class="w-full bg-gray-900 px-3 py-1">

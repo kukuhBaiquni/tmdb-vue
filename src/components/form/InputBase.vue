@@ -1,7 +1,5 @@
 <script>
 import ButtonBase from '../common/ButtonBase.vue'
-import { debounce } from 'throttle-debounce'
-import { searchMovie } from '../../api/movies'
 
 export default {
   name: 'InputBase',
@@ -9,47 +7,38 @@ export default {
     ButtonBase,
   },
   props: {
-    value: {
-      type: [String, Number],
-      default: '',
-    },
-    className: {
+    label: {
       type: String,
-      default: 'fc',
+      default: '',
     },
     type: {
       type: String,
       default: 'text',
     },
+    name: {
+      type: String,
+      default: 'name',
+    },
     onEnter: {
       type: Function,
       default: () => {},
     },
-    onButtonPress: {
+    onButtonClick: {
       type: Function,
       default: () => {},
     },
-    label: {
-      type: String,
-      default: '',
+    onInput: {
+      type: Function,
+      default: () => {},
     },
-  },
-  methods: {
-    onKeyPress(evt) {
-      if (evt.key === 'Enter') {
-        this.onEnter()
-      }
+    onFocus: {
+      type: Function,
+      default: () => {},
     },
-    debounceInput: debounce(500, async (e) => {
-      const { value } = e.target
-      if (value) {
-        const response = await searchMovie({
-          query: e.target.value,
-          include_adult: true,
-        })
-        console.log(response)
-      }
-    }),
+    onBlur: {
+      type: Function,
+      default: () => {},
+    },
   },
 }
 </script>
@@ -59,13 +48,17 @@ export default {
     {{ label }}
     <div class="input-wrapper">
       <input
+        autocomplete="off"
         class="bg-transparent w-full h-full"
-        type="search"
+        :type="type"
+        :name="name"
         placeholder="Search Movies.."
-        @keyup="onKeyPress"
-        @input="debounceInput"
+        @keyup="onEnter"
+        @input="onInput"
+        @focus="onFocus"
+        @blur="onBlur"
       />
-      <ButtonBase>
+      <ButtonBase @click="onButtonClick">
         <template #child>
           <slot name="icon" />
         </template>
