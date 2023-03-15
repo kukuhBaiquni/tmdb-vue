@@ -1,5 +1,5 @@
 
-import API from './'
+import API from '../lib/axios'
 
 export const getMovieNowPlaying = async (params) => 
   API({
